@@ -1,0 +1,9 @@
+node_modules
+/.idea/
+.DS_Store
+*.log
+.babelrc
+.flowconfig
+*.mp4
+/data/
+*.png
