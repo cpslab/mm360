@@ -1,0 +1,19 @@
+{
+  "name": "mm360",
+  "version": "1.0.0",
+  "description": "MM360 has been newly reborn from [SharedPanoramaVideo](https://github.com/cpslab/SharedPanoramaVideo/)",
+  "main": "mm360.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpslab/mm360.git"
+  },
+  "author": "nshiba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cpslab/mm360/issues"
+  },
+  "homepage": "https://github.com/cpslab/mm360#readme"
+}
