@@ -3,15 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify main.js  -o bundle.js",
+    "watch-upload": "watchify upload/main.js -o upload/bundle.js",
+    "watch-remote": "watchify remote/main.js -o remote/bundle.js",
+    "build": "babel main.js --out-file main.out.js",
+    "build:watch": "babel main.js --watch --out-file main.out.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.80.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "s3": "^4.4.0",
+    "serve-favicon": "~2.4.2",
+    "three-orbit-controls": "^82.1.0",
+    "watchify": "^3.9.0"
   }
 }
