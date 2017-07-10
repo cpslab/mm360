@@ -1,26 +1,17 @@
 {
   "name": "mm360",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify main.js  -o bundle.js",
-    "watch-upload": "watchify upload/main.js -o upload/bundle.js",
-    "watch-remote": "watchify remote/main.js -o remote/bundle.js",
-    "build": "babel main.js --out-file main.out.js",
-    "build:watch": "babel main.js --watch --out-file main.out.js"
-  },
   "dependencies": {
-    "aws-sdk": "^2.80.0",
-    "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.3",
-    "express": "~4.15.2",
-    "jade": "~1.11.0",
-    "morgan": "~1.8.1",
-    "s3": "^4.4.0",
-    "serve-favicon": "~2.4.2",
-    "three-orbit-controls": "^82.1.0",
-    "watchify": "^3.9.0"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
