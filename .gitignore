@@ -10,3 +10,5 @@ node_modules
 /out/
 /headers/
 bundle.js
+/dev/
+/public/
