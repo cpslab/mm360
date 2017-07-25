@@ -6,23 +6,12 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+import fetch from 'isomorphic-fetch'
+import queryString from 'query-string'
 
+import Home from './Top.js'
 
-class Home extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const policyRootUrl = "http://localhost:5000/api/policy";
 
 class Board extends Component {
     renderSquare(i) {
@@ -41,14 +30,63 @@ class Square extends Component {
 }
 
 class Upload extends Component {
+
+    state = { isPosting: false };
+
+    componentDidMount() {
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log(this.state.postUrl);
+        this.setState({ isPosting: true });
+
+        await fetch(this.state.postUrl, {
+            method: 'PUT',
+            body: this.state.file,
+            headers: {
+                "Content-Type": this.state.file.type
+            }
+        });
+        this.setState({ isPosting: false })
+    };
+
+    handleFile = (e) => {
+        const reader = new FileReader();
+        const file = e.target.files[0];
+
+        reader.onload = async () => {
+            const param = {
+                project_name: "test",
+                filename: file.name,
+                content_type: file.type
+            };
+
+            const policyUrl = policyRootUrl + "?" + queryString.stringify(param);
+            console.log(policyUrl);
+            const url = await (await fetch(policyUrl)).text();
+
+            this.setState({
+                 postUrl: url,
+                 file: file
+            });
+        };
+
+        reader.readAsDataURL(file);
+    };
+
     render() {
+
         return (
             <div className="App">
-                <button className="upload">
-                    test
-                </button>
-                <p>test</p>
+                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                    <input type="file" onChange={this.handleFile} />
+                    <input className='btn btn-primary' type="submit" value="Upload" />
+                </form>
+                <p>{this.state.isPosting ? "progress..." : ""}</p>
             </div>
+
         )
     }
 }
