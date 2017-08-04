@@ -10,6 +10,7 @@ import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
 import Home from './Top.js'
+import Project from "./Project";
 
 const policyRootUrl = "http://localhost:5000/api/policy";
 
@@ -94,16 +95,8 @@ class Upload extends Component {
 const MyRouter = () => (
     <Router>
         <div>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/board">Board</Link></li>
-                <li><Link to="/upload">Upload</Link></li>
-            </ul>
-
-            <hr/>
-
             <Route exact path="/" component={Home}/>
-            <Route path="/about" component={Board}/>
+            <Route path="/project/:projectName" component={Project}/>
             <Route path="/upload" component={Upload}/>
         </div>
     </Router>
