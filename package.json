@@ -1,7 +1,6 @@
 {
   "name": "mm360",
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://cpslab.github.io/mm360",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
