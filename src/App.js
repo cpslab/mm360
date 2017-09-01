@@ -12,6 +12,7 @@ import PanoramicView from "./PanoramicView";
 const MyRouter = () => (
     <main>
         <Switch>
+            {console.log("App")}
             <Route exact path='/' component={Home} />
             <Route path="/project/:projectName" component={Project}/>
             <Route path="/panorama/:projectName/" component={PanoramicView}/>
