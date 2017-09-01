@@ -100,6 +100,7 @@ export default class UploadVideo extends Component {
     };
 
     createGoogleMap = (item) => {
+        console.log(`lat: ${item.pointGps.latitude}, lng: ${item.pointGps.longitude}`);
         const PointGoogleMap = withGoogleMap(props => (
             <GoogleMap
                 defaultZoom={18}

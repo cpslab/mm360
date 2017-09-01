@@ -11,6 +11,7 @@ import queryString from 'query-string'
 
 import Home from './Top.js'
 import Project from "./Project";
+import PanoramicView from "./PanoramicView";
 
 const policyRootUrl = "http://localhost:5000/api/policy";
 
@@ -97,6 +98,7 @@ const MyRouter = () => (
         <div>
             <Route exact path="/" component={Home}/>
             <Route path="/project/:projectName" component={Project}/>
+            <Route path="/panorama/:projectName/" component={PanoramicView}/>
             <Route path="/upload" component={Upload}/>
         </div>
     </Router>

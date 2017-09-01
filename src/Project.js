@@ -40,6 +40,7 @@ export default class Project extends Component {
     };
 
     render() {
+        // debugger
         if (!this.state.isLoaded) {
             return (<p>loading...</p>)
         }
@@ -74,7 +75,8 @@ export default class Project extends Component {
         return (
             <div>
                 <h1>{data.projectName}</h1>
-                <h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>
+                {/*<h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>*/}
+                <h2><Link to={`/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
                 <button>open panoramic view</button>
                 <p>sensor is uploaded</p>
                 <p>video is uploaded</p>

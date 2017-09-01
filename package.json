@@ -4,12 +4,15 @@
   "private": true,
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-maps": "^7.2.0",
     "react-router-dom": "^4.1.1",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.10",
+    "three": "^0.86.0",
+    "three-orbit-controls": "^82.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
