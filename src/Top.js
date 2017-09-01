@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 
 export default class Home extends Component {
 
-    rootUrl = "http://localhost:5000/api";
+    // rootUrl = "http://localhost:5000/api";
+    rootUrl = "https://rocky-woodland-39339.herokuapp.com/api";
 
     state = {
         projectList: [],

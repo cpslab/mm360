@@ -19,7 +19,8 @@ import UploadVideo from "./UploadVideo"
 import * as THREE from 'three';
 import ThreeOrbitControls from 'three-orbit-controls';
 
-const rootUrl = 'http://localhost:5000';
+// const rootUrl = 'http://localhost:5000';
+const rootUrl = 'https://rocky-woodland-39339.herokuapp.com';
 
 const OrbitControls = new ThreeOrbitControls(THREE);
 

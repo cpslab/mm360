@@ -3,7 +3,8 @@ import './App.css';
 import fetch from 'isomorphic-fetch'
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
-const endpoint = "http://localhost:5000";
+// const endpoint = "http://localhost:5000";
+const endpoint = "https://rocky-woodland-39339.herokuapp.com";
 
 const policyRootUrl = `${endpoint}/api/policy`;
 

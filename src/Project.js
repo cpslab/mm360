@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 import UploadCsv from "./UploadCsv";
 import UploadVideo from "./UploadVideo"
 
-const fetchUrl = "http://localhost:5000/api/project";
+// const fetchUrl = "http://localhost:5000/api/project";
+const fetchUrl = "https://rocky-woodland-39339.herokuapp.com/api/project";
 
 export default class Project extends Component {
 

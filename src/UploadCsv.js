@@ -4,7 +4,8 @@ import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 import moment from 'moment'
 
-const endpoint = "http://localhost:5000/api/project";
+// const endpoint = "http://localhost:5000/api/project";
+const endpoint = "https://rocky-woodland-39339.herokuapp.com//api/project";
 
 export default class UploadCsv extends Component {
 

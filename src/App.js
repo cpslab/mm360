@@ -13,7 +13,8 @@ import Home from './Top.js'
 import Project from "./Project";
 import PanoramicView from "./PanoramicView";
 
-const policyRootUrl = "http://localhost:5000/api/policy";
+// const policyRootUrl = "http://localhost:5000/api/policy";
+const policyRootUrl = "https://rocky-woodland-39339.herokuapp.com/api/policy";
 
 class Board extends Component {
     renderSquare(i) {
