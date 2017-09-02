@@ -10,6 +10,11 @@ import Project from "./Project";
 import PanoramicView from "./PanoramicView";
 
 export default class App extends Component {
+
+    componentDidMount() {
+        console.log("App componentDidMount");
+    }
+
     render() {
         return (
             <main>
