@@ -9,7 +9,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render((
     <BrowserRouter>
-        {console.log("mm360: index")}
         <App />
     </BrowserRouter>
 ), document.getElementById('root'));
