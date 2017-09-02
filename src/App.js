@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {
     Route,
-    Switch
+    BrowserRouter as Router
 } from 'react-router-dom';
 
 import Home from './Top.js'
@@ -17,11 +17,13 @@ export default class App extends Component {
 
     render() {
         return (
-            <main>
-                <Route exact path='/' component={Home} />
-                <Route path="/project/:projectName" component={Project}/>
-                <Route path="/panorama/:projectName/" component={PanoramicView}/>
-            </main>
+            <Router>
+                <div>
+                    <Route exact path='/' component={Home} />
+                    <Route path="/project/:projectName" component={Project}/>
+                    <Route path="/panorama/:projectName/" component={PanoramicView}/>
+                </div>
+            </Router>
         );
     }
 }
