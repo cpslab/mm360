@@ -19,9 +19,9 @@ export default class App extends Component {
         return (
             <Router>
                 <div>
-                    <Route path='/' component={Home} />
-                    <Route path="/project/:projectName" component={Project}/>
-                    <Route path="/panorama/:projectName/" component={PanoramicView}/>
+                    <Route path={process.env.PUBLIC_URL + "/"} component={Home} />
+                    <Route path={process.env.PUBLIC_URL + "/project/:projectName"} component={Project}/>
+                    <Route path={process.env.PUBLIC_URL + "/panorama/:projectName/"} component={PanoramicView}/>
                 </div>
             </Router>
         );
