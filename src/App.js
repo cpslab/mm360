@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import {
     Route,
-    BrowserRouter as Router
+    BrowserRouter as Router,
+    Switch
 } from 'react-router-dom';
 
 import Home from './Top.js'
@@ -18,11 +19,11 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <div>
-                    <Route path={process.env.PUBLIC_URL + "/"} component={Home} />
+                <Switch>
+                    <Route exact path={process.env.PUBLIC_URL + "/"} component={Home} />
                     <Route path={process.env.PUBLIC_URL + "/project/:projectName"} component={Project}/>
                     <Route path={process.env.PUBLIC_URL + "/panorama/:projectName/"} component={PanoramicView}/>
-                </div>
+                </Switch>
             </Router>
         );
     }
