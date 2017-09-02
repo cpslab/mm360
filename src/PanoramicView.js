@@ -173,7 +173,7 @@ export default class PanoramicView extends Component {
         const iconMesh = new THREE.Mesh(
             new THREE.PlaneGeometry(1.5, 1.5),
             new THREE.MeshBasicMaterial({
-                map: this.loader.load('/arrow_icon.png'),
+                map: this.loader.load(`${process.env.PUBLIC_URL}/arrow_icon.png`),
                 alphaTest: 0.2 })
         );
 
