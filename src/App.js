@@ -19,11 +19,11 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <Switch>
+                <div>
                     <Route exact path={process.env.PUBLIC_URL + "/"} component={Home} />
                     <Route path={process.env.PUBLIC_URL + "/project/:projectName"} component={Project}/>
                     <Route path={process.env.PUBLIC_URL + "/panorama/:projectName/"} component={PanoramicView}/>
-                </Switch>
+                </div>
             </Router>
         );
     }
