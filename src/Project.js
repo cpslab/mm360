@@ -77,7 +77,7 @@ export default class Project extends Component {
             <div>
                 <h1>{data.projectName}</h1>
                 {/*<h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>*/}
-                <h2><Link to={`/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
+                <h2><Link to={`${process.env.PUBLIC_URL}/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
                 <button>open panoramic view</button>
                 <p>sensor is uploaded</p>
                 <p>video is uploaded</p>

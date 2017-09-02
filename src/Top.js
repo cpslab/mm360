@@ -49,7 +49,7 @@ export default class Home extends Component {
             <div>
                 {
                     this.state.projectList.map(item =>
-                        <p><Link to={`/project/${item.projectName}`} >{item.projectName}</Link></p>)
+                        <p><Link to={`${process.env.PUBLIC_URL}/project/${item.projectName}`} >{item.projectName}</Link></p>)
                 }
 
                 <form onSubmit={this.handleSubmit}>

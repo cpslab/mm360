@@ -11,7 +11,7 @@ const policyRootUrl = `${endpoint}/api/policy`;
 const projectUrl = `${endpoint}/api/project`;
 
 // const googleMapUrl = "https://maps.googleapis.com/maps/api/js?v=3.27&libraries=places,geometry&key=AIzaSyDbIzmRjzO72PM8L9yGnxwwbPchzY7tvqQ";
-const googleMapUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbIzmRjzO72PM8L9yGnxwwbPchzY7tvqQ";
+const googleMapUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbIzmRjzO72PM8L9yGnxwwbPchzY7tvqQ&v=3.27";
 
 export default class UploadVideo extends Component {
 
