@@ -9,15 +9,17 @@ import Home from './Top.js'
 import Project from "./Project";
 import PanoramicView from "./PanoramicView";
 
-const MyRouter = () => (
-    <main>
-        <Switch>
-            {console.log("App")}
-            <Route exact path='/' component={Home} />
-            <Route path="/project/:projectName" component={Project}/>
-            <Route path="/panorama/:projectName/" component={PanoramicView}/>
-        </Switch>
-    </main>
-);
-
-export default MyRouter;
+export default class App extends Component {
+    render() {
+        return (
+            <main>
+                <Switch>
+                    {console.log("App")}
+                    <Route exact path='/' component={Home} />
+                    <Route path="/project/:projectName" component={Project}/>
+                    <Route path="/panorama/:projectName/" component={PanoramicView}/>
+                </Switch>
+            </main>
+        );
+    }
+}
