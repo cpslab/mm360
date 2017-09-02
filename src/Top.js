@@ -13,6 +13,7 @@ export default class Home extends Component {
     };
 
     componentDidMount() {
+        console.log("Top componentDidMount");
         this.fetchProjectList();
     }
 
