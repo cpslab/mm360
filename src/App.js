@@ -18,12 +18,9 @@ export default class App extends Component {
     render() {
         return (
             <main>
-                <Switch>
-                    {console.log("App")}
-                    <Route exact path='/' component={Home} />
-                    <Route path="/project/:projectName" component={Project}/>
-                    <Route path="/panorama/:projectName/" component={PanoramicView}/>
-                </Switch>
+                <Route exact path='/' component={Home} />
+                <Route path="/project/:projectName" component={Project}/>
+                <Route path="/panorama/:projectName/" component={PanoramicView}/>
             </main>
         );
     }
