@@ -5,7 +5,7 @@ import UploadCsv from "./UploadCsv";
 import UploadVideo from "./UploadVideo"
 
 // const fetchUrl = "http://localhost:5000/api/project";
-const fetchUrl = "https://rocky-woodland-39339.herokuapp.com/api/project";
+const fetchUrl = "https://mm360-server.herokuapp.com/api/project";
 
 export default class Project extends Component {
 
@@ -16,6 +16,7 @@ export default class Project extends Component {
 
     componentDidMount() {
         console.log(this.props.match.params.projectName);
+        console.log(this.state);
         this.fetchProjectData();
         this.fetchSensorData();
     }
@@ -66,7 +67,7 @@ export default class Project extends Component {
             return (
                 <div>
                     <h1>{data.projectName}</h1>
-                    <p>sensor is uploaded</p>
+                    <p>sensor was uploaded</p>
                     <p>require video data</p>
                     <UploadVideo name={this.props.match.params.projectName} />
                 </div>
@@ -78,9 +79,9 @@ export default class Project extends Component {
                 <h1>{data.projectName}</h1>
                 {/*<h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>*/}
                 <h2><Link to={`${process.env.PUBLIC_URL}/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
-                <button>open panoramic view</button>
-                <p>sensor is uploaded</p>
-                <p>video is uploaded</p>
+                <p>sensor was uploaded</p>
+                <p>video was uploaded</p>
+                <h3>Uploaded Video List</h3>
                 { data.pointVideoPathList.map(this.createVideoPathItem) }
             </div>
         )

@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch'
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
 // const endpoint = "http://localhost:5000";
-const endpoint = "https://rocky-woodland-39339.herokuapp.com";
+const endpoint = "https://mm360-server.herokuapp.com";
 
 const policyRootUrl = `${endpoint}/api/policy`;
 
@@ -18,6 +18,7 @@ export default class UploadVideo extends Component {
     state = {
         isPosting: false,
         isFileLoading: false,
+        isLoading: true,
         uploadUrlList: [],
         uploadedVideoUrlList: []
     };
@@ -30,7 +31,10 @@ export default class UploadVideo extends Component {
         console.log(`${projectUrl}/${this.props.name}/pre-signed-url-list`);
         const response = await fetch(`${projectUrl}/${this.props.name}/pre-signed-url-list`);
         const json = await response.json();
-        this.setState({ uploadUrlList: json });
+        this.setState({
+            uploadUrlList: json,
+            isLoading: false
+        });
     };
 
     handleSubmit = async (e, url, pointId) => {
@@ -160,18 +164,36 @@ export default class UploadVideo extends Component {
             body: JSON.stringify(data)
         });
         const result = await updateResponse.text();
-        console.log(`result: ${result}, status code: ${updateResponse.status}`)
+
+        if (updateResponse.status === 200) {
+            window.location.reload()
+        } else {
+            console.log(`result: ${result}, status code: ${updateResponse.status}`);
+            console.log(updateResponse);
+            alert("error");
+        }
     };
 
     render() {
         return (
             <div className="App">
+                { this.createUploadVideoBlock() }
+            </div>
+        )
+    }
+
+    createUploadVideoBlock = () => {
+        if (this.state.isLoading) {
+            return <p>loading...</p>
+        }
+
+        return (
+            <div>
                 <button onClick={this.handleSubmitComplete}>Upload Complete</button>
                 <br/>
                 { this.state.uploadUrlList.map(this.createUploadItem) }
                 <p>{this.state.isPosting || this.state.isFileLoading ? "waiting..." : ""}</p>
             </div>
-
         )
     }
 }

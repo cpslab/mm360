@@ -1,26 +1,10 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch'
-import {Link} from "react-router-dom";
-import UploadCsv from "./UploadCsv";
-import UploadVideo from "./UploadVideo"
-// import {
-//     LinearFilter,
-//     Mesh,
-//     MeshBasicMaterial,
-//     PerspectiveCamera,
-//     PlaneGeometry,
-//     Raycaster,
-//     Scene,
-//     SphereGeometry,
-//     TextureLoader, Vector3,
-//     VideoTexture,
-//     WebGLRenderer
-// } from 'three';
 import * as THREE from 'three';
 import ThreeOrbitControls from 'three-orbit-controls';
 
 // const rootUrl = 'http://localhost:5000';
-const rootUrl = 'https://rocky-woodland-39339.herokuapp.com';
+const rootUrl = 'https://mm360-server.herokuapp.com';
 
 const OrbitControls = new ThreeOrbitControls(THREE);
 
@@ -315,7 +299,7 @@ export default class PanoramicView extends Component {
 
 
     correctionTheta = (target, index) => {
-        return parseFloat(target.sensorData[index].attitude.theta) -90;
+        return parseFloat(target.sensorData[index].attitude.theta);
     };
 
     firstAttitude = () => {

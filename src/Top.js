@@ -5,10 +5,11 @@ import {Link} from "react-router-dom";
 export default class Home extends Component {
 
     // rootUrl = "http://localhost:5000/api";
-    rootUrl = "https://rocky-woodland-39339.herokuapp.com/api";
+    rootUrl = "https://mm360-server.herokuapp.com/api";
 
     state = {
         projectList: [],
+        isLoading: true,
         text: ""
     };
 
@@ -20,7 +21,10 @@ export default class Home extends Component {
     fetchProjectList = async () => {
         const response = await fetch(`${this.rootUrl}/projects`);
         const list = await response.json();
-        this.setState({ projectList: list });
+        this.setState({
+            projectList: list,
+            isLoading: false,
+        });
     };
 
     handleChange = (e) => {
@@ -47,14 +51,36 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                {
-                    this.state.projectList.map(item =>
-                        <p><Link to={`${process.env.PUBLIC_URL}/project/${item.projectName}`} >{item.projectName}</Link></p>)
-                }
+                { this.createNewProjectBlock() }
+                <br/>
+                { this.createProjectListBlock() }
+                <br/>
+            </div>
+        )
+    }
 
+    createProjectListBlock = () => {
+        return (
+            <div>
+                <h2>Project List</h2>
+                { this.state.isLoading ? "loading..." :
+                    this.state.projectList.map(item =>
+                        <p><Link to={`${process.env.PUBLIC_URL}/project/${item.projectName}`} >
+                            {item.projectName}
+                        </Link></p>
+                    )
+                }
+            </div>
+        )
+    };
+
+    createNewProjectBlock = () => {
+        return (
+            <div>
+                <h2>Create New Project</h2>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" value={this.state.text} onChange={this.handleChange} />
-                    <button type="submit" value="submit" >Submit</button>
+                    <button type="submit" value="submit" >create</button>
                 </form>
             </div>
         )
