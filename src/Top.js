@@ -35,6 +35,8 @@ export default class Home extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
+        this.setState({ isLoading: true });
+
         console.log(this.state.text);
         const response = await fetch(`${this.rootUrl}/create`, {
             method: "POST",
@@ -44,7 +46,26 @@ export default class Home extends Component {
         if (result === "success") {
             window.location.reload()
         } else {
-            alert("upload error");
+            alert("failed to create project");
+            this.setState({ isLoading: false });
+        }
+    };
+
+    handleDeleteClick = async (projectName) => {
+        const result = window.confirm(`${projectName}削除しますか？`);
+        if (!result) {
+            return;
+        }
+
+        this.setState({ isLoading: true });
+
+        const response = await fetch(`${this.rootUrl}/project/${projectName}/delete`, { method: "POST" });
+        const code = await response.status;
+        if (code === 200) {
+            window.location.reload();
+        } else {
+            alert("failed delete");
+            this.setState({ isLoading: false });
         }
     };
 
@@ -65,9 +86,12 @@ export default class Home extends Component {
                 <h2>Project List</h2>
                 { this.state.isLoading ? "loading..." :
                     this.state.projectList.map(item =>
-                        <p><Link to={`${process.env.PUBLIC_URL}/project/${item.projectName}`} >
+                    <div style={{ marginBottom: 10 }}>
+                        <Link to={`${process.env.PUBLIC_URL}/project/${item.projectName}`} >
                             {item.projectName}
-                        </Link></p>
+                        </Link>
+                        <button style={{ marginLeft: 10 }} onClick={() => this.handleDeleteClick(item.projectName)}>削除</button>
+                    </div>
                     )
                 }
             </div>
