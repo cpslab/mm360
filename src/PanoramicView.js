@@ -50,13 +50,17 @@ export default class PanoramicView extends Component {
     }
 
     onMouseDown = (e) => {
+        const index = Math.floor(this.video.currentTime);
+        const now = this.currentData(this.currentId);
+        const timestamp = now.sensorData[index].timestamp;
+
         const ray = this.getMouseRay(e);
         const isMeshClick = this.isMeshClick(ray);
         console.log(isMeshClick);
 
 
         if (isMeshClick) {
-            this.changeVideo(this.currentData(this.currentId).path);
+            this.changeVideo(this.currentData(this.currentId).path, timestamp);
             this.clearLink();
             this.addLink(this.video.currentTime);
         }
@@ -324,12 +328,28 @@ export default class PanoramicView extends Component {
         return calc;
     };
 
-    changeVideo = (src) => {
+    changeVideo = (src, timestamp) => {
         console.log(`video src: ${src}`);
-        this.currentTime = this.video.currentTime;
+        const time = this.fetchAfterChangeVideoTime(timestamp);
+        console.log(`after changing video time: ${time}`);
+        this.currentTime = time;
         this.video.src = src;
         this.video.removeEventListener('loadeddata', this.seekTime);
         this.video.addEventListener('loadeddata', this.seekTime);
+    };
+
+    fetchAfterChangeVideoTime = (timestamp) => {
+        const now = this.currentData(this.currentId);
+        for (let i = 0; i < now.sensorData.length; i++) {
+            console.log(`now: ${now.sensorData[i].timestamp}, timestamp: ${timestamp}`);
+            if (now.sensorData[i].timestamp === timestamp) {
+                console.log("return if timestamp");
+                return i;
+            }
+        }
+
+        console.log("video.currentTime");
+        return this.video.currentTime;
     };
 
     seekTime = () => {
