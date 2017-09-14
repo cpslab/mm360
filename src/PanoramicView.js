@@ -97,7 +97,7 @@ export default class PanoramicView extends Component {
         this.video.autoplay = false;
         this.video.loop = false;
         this.video.crossOrigin = '';
-        this.video.src = this.currentData(this.currentId).path
+        this.video.src = this.currentData(this.currentId).path;
         // this.video.src = '/theta1.mp4';
         this.video.addEventListener('loadeddata', () => { this.video.play(); });
         console.log(this.video.src);

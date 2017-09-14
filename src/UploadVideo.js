@@ -90,7 +90,7 @@ export default class UploadVideo extends Component {
 
     createUploadItem = (item) => {
         return (
-            <div className="upload-video-item">
+            <div style={{ width: 300, float: "left", margin: 16 }} className="upload-video-item">
                 <p>point{item.pointId}</p>
                 <form onSubmit={e => this.handleSubmit(e, item.preSignedUploadUrl, item.pointId)} encType="multipart/form-data">
                     <input type="file" onChange={this.handleFile} />
@@ -188,7 +188,7 @@ export default class UploadVideo extends Component {
         }
 
         return (
-            <div>
+            <div style={{ width: "80%", margin: "auto" }}>
                 <button onClick={this.handleSubmitComplete}>Upload Complete</button>
                 <br/>
                 { this.state.uploadUrlList.map(this.createUploadItem) }
