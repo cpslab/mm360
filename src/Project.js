@@ -66,25 +66,40 @@ export default class Project extends Component {
         if (data.pointVideoPathList.length <= 0) {
             return (
                 <div>
+                    { this.createUploadVideoBlock(data) }
+                </div>
+            )
+        } else {
+            return (
+                <div>
                     <h1>{data.projectName}</h1>
-                    <p>sensor was uploaded</p>
-                    <p>require video data</p>
-                    <UploadVideo name={this.props.match.params.projectName} />
+                    <h2><Link to={`${process.env.PUBLIC_URL}/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
+                    { this.createUploadVideoBlock(data) }
                 </div>
             )
         }
 
+        // return (
+        //     <div>
+        //         <h1>{data.projectName}</h1>
+        //         {/*<h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>*/}
+        //         <h2><Link to={`${process.env.PUBLIC_URL}/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
+        //         <p>sensor was uploaded</p>
+        //         <p>video was uploaded</p>
+        //         <h3>Uploaded Video List</h3>
+        //         { data.pointVideoPathList.map(this.createVideoPathItem) }
+        //     </div>
+        // )
+    }
+
+    createUploadVideoBlock = (data) => {
         return (
             <div>
-                <h1>{data.projectName}</h1>
-                {/*<h2><Link to={`/project/${this.props.match.params.projectName}/panoramic`} >Open Panoramic View</Link></h2>*/}
-                <h2><Link to={`${process.env.PUBLIC_URL}/panorama/${this.props.match.params.projectName}`} >Open Panoramic View</Link></h2>
                 <p>sensor was uploaded</p>
-                <p>video was uploaded</p>
-                <h3>Uploaded Video List</h3>
-                { data.pointVideoPathList.map(this.createVideoPathItem) }
+                <p>require video data</p>
+                <UploadVideo name={this.props.match.params.projectName} data={data} />
             </div>
         )
-    }
+    };
 
 }

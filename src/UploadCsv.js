@@ -189,6 +189,8 @@ export default class UploadCsv extends Component {
         //     postData += `${v};`
         // });
 
+        this.setState({ isPosting: true });
+
         const postUrl = `${fetchUrl}/${this.props.name}/sensor/raw`;
         const response = await fetch(postUrl, {
             method: "POST",
@@ -232,6 +234,8 @@ export default class UploadCsv extends Component {
         if (this.state.sensorRawList.length <= 0) {
             return;
         }
+
+        this.setState({ isLoading: true });
 
         console.log('handle submit complete');
         const response = await fetch(`${fetchUrl}/${this.props.name}/sensor/raw/complete`, { method: 'POST' });

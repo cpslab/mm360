@@ -10,9 +10,6 @@ const policyRootUrl = `${endpoint}/api/policy`;
 
 const projectUrl = `${endpoint}/api/project`;
 
-// const googleMapUrl = "https://maps.googleapis.com/maps/api/js?v=3.27&libraries=places,geometry&key=AIzaSyDbIzmRjzO72PM8L9yGnxwwbPchzY7tvqQ";
-const googleMapUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbIzmRjzO72PM8L9yGnxwwbPchzY7tvqQ&v=3.27";
-
 export default class UploadVideo extends Component {
 
     state = {
@@ -24,6 +21,8 @@ export default class UploadVideo extends Component {
     };
 
     componentDidMount() {
+        console.log(`upload video:`);
+        console.log(this.props.data);
         this.fetchUploadUrlList();
     }
 
@@ -35,6 +34,14 @@ export default class UploadVideo extends Component {
             uploadUrlList: json,
             isLoading: false
         });
+    };
+
+    postUploadedVideo = async (id, path) => {
+        fetch(`${projectUrl}/${this.props.name}/video`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+            body: JSON.stringify({ id: parseInt(id), path: path })
+        })
     };
 
     handleSubmit = async (e, url, pointId) => {
@@ -55,7 +62,8 @@ export default class UploadVideo extends Component {
         if (response.status === 200) {
             const index = url.indexOf("?");
             const accessUrl = url.substring(0, index);
-            this.state.uploadedVideoUrlList.push({ id: pointId, path: accessUrl });
+            // this.state.uploadedVideoUrlList.push({ id: pointId, path: accessUrl });
+            await this.postUploadedVideo(pointId, accessUrl);
             console.log(accessUrl);
         } else {
             alert('upload error')
@@ -86,62 +94,6 @@ export default class UploadVideo extends Component {
         };
 
         reader.readAsDataURL(file);
-    };
-
-    createUploadItem = (item) => {
-        return (
-            <div style={{ width: 300, float: "left", margin: 16 }} className="upload-video-item">
-                <p>point{item.pointId}</p>
-                <form onSubmit={e => this.handleSubmit(e, item.preSignedUploadUrl, item.pointId)} encType="multipart/form-data">
-                    <input type="file" onChange={this.handleFile} />
-                    <input disabled={this.state.isPosting || this.state.isFileLoading } className='btn btn-primary' type="submit" value="Upload" />
-                </form>
-                <p>{this.state.isPosting || this.state.isFileLoading ? "waiting..." : ""}</p>
-                <p>{item.pointGps.latitude} / {item.pointGps.longitude}</p>
-                {this.createGoogleMap(item)}
-                <br/>
-            </div>
-        );
-    };
-
-    createGoogleMap = (item) => {
-        console.log(`lat: ${item.pointGps.latitude}, lng: ${item.pointGps.longitude}`);
-        const PointGoogleMap = withGoogleMap(props => (
-            <GoogleMap
-                defaultZoom={18}
-                defaultCenter={{ lat: props.lat, lng: props.lng }}
-            >
-                {props.markers.map((marker, index) => (
-                    <Marker
-                        {...marker}
-                    />
-                ))}
-            </GoogleMap>
-        ));
-
-        const markerData = [{
-            position: {
-                lat: item.pointGps.latitude,
-                lng: item.pointGps.longitude,
-            },
-            key: `Japan`,
-        }];
-
-        return (
-            <div style={{ height: 300, width: 300 }}>
-                <PointGoogleMap
-                    containerElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    mapElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    markers={markerData}
-                    lat={item.pointGps.latitude}
-                    lng={item.pointGps.longitude}
-                />
-            </div>
-        )
     };
 
     handleSubmitComplete = async () => {
@@ -187,13 +139,92 @@ export default class UploadVideo extends Component {
             return <p>loading...</p>
         }
 
+        if (this.state.isPosting || this.state.isFileLoading) {
+            return <p>uploading...</p>
+        }
+
         return (
             <div style={{ width: "80%", margin: "auto" }}>
                 <button onClick={this.handleSubmitComplete}>Upload Complete</button>
                 <br/>
                 { this.state.uploadUrlList.map(this.createUploadItem) }
-                <p>{this.state.isPosting || this.state.isFileLoading ? "waiting..." : ""}</p>
             </div>
         )
-    }
+    };
+
+    createUploadedVideoItem = (videoUrl) => {
+        if (videoUrl === undefined || videoUrl === "") {
+            return (
+                <div>
+                    <p>uploaded video</p>
+                    <p>no data</p>
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <p>uploaded video</p>
+                <video width={300} src={videoUrl} alt={videoUrl} />
+            </div>
+        )
+    };
+
+    createUploadItem = (item) => {
+        console.log(item);
+        return (
+            <div style={{ width: 300, float: "left", margin: 16 }} className="upload-video-item">
+                <h3>point{item.pointId}</h3>
+                <form onSubmit={e => this.handleSubmit(e, item.preSignedUploadUrl, item.pointId)} encType="multipart/form-data">
+                    <input type="file" onChange={this.handleFile} />
+                    <input disabled={this.state.isPosting || this.state.isFileLoading } className='btn btn-primary' type="submit" value="Upload" />
+                </form>
+                <p>{this.state.isPosting || this.state.isFileLoading ? "waiting..." : ""}</p>
+                <p>{item.pointGps.latitude} / {item.pointGps.longitude}</p>
+                {this.createGoogleMap(item)}
+                { this.createUploadedVideoItem(item.uploadedUrl) }
+                <br/>
+            </div>
+        );
+    };
+
+    createGoogleMap = (item) => {
+        console.log(`lat: ${item.pointGps.latitude}, lng: ${item.pointGps.longitude}`);
+        const PointGoogleMap = withGoogleMap(props => (
+            <GoogleMap
+                defaultZoom={18}
+                defaultCenter={{ lat: props.lat, lng: props.lng }}
+            >
+                {props.markers.map((marker, index) => (
+                    <Marker
+                        {...marker}
+                    />
+                ))}
+            </GoogleMap>
+        ));
+
+        const markerData = [{
+            position: {
+                lat: item.pointGps.latitude,
+                lng: item.pointGps.longitude,
+            },
+            key: `Japan`,
+        }];
+
+        return (
+            <div style={{ height: 300, width: 300 }}>
+                <PointGoogleMap
+                    containerElement={
+                        <div style={{ height: `100%` }} />
+                    }
+                    mapElement={
+                        <div style={{ height: `100%` }} />
+                    }
+                    markers={markerData}
+                    lat={item.pointGps.latitude}
+                    lng={item.pointGps.longitude}
+                />
+            </div>
+        )
+    };
 }
