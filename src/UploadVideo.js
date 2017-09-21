@@ -139,7 +139,7 @@ export default class UploadVideo extends Component {
             return <p>loading...</p>
         }
 
-        if (this.state.isPosting || this.state.isFileLoading) {
+        if (this.state.isPosting) {
             return <p>uploading...</p>
         }
 

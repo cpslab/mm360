@@ -24,6 +24,7 @@
     "clean": "rm -rf node_modules/gh-pages/.cache"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0"
+    "gh-pages": "^1.0.0",
+    "react-stats": "0.0.5"
   }
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch'
 import * as THREE from 'three';
 import ThreeOrbitControls from 'three-orbit-controls';
+import {FPSStats} from 'react-stats'
 
 // const rootUrl = 'http://localhost:5000';
 const rootUrl = 'https://mm360-server.herokuapp.com';
@@ -41,7 +42,12 @@ export default class PanoramicView extends Component {
     gpsIndex = 0;
 
     render() {
-        return (  <div id="stage"></div> );
+        return (
+            <div>
+                <FPSStats/>
+                <div id="stage"/>
+            </div>
+        );
     }
 
     componentDidMount() {
